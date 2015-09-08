@@ -10,11 +10,8 @@ class NewsAll
     }
     public static function All()
     {
-        echo '111';die;
-        /*
         $ob=new DB();
         self::$news=$ob->get(NewsAll::$sql);
         ViewsONE::showeAll(self::$news);
-        */
     }
 }
