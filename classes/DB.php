@@ -46,15 +46,16 @@ class DB
         }
     }
 
-    public function query($sql)
+    public function query($sql, $class='stdClass')
     {
         $res= $this->pdo->query($sql);
-        $ret=[];
-        while($row=$res->fetch(PDO::FETCH_OBJ))
-        {
-            $ret[]=$row;
-        }
-        return $ret;
+        $result=$res->fetchAll(PDO::FETCH_CLASS,$class);
+
+         $ret=[];
+         foreach($result as $row){
+             $ret[]=$row;
+         }
+         return $ret;
     }
 }
 
