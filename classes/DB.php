@@ -46,8 +46,9 @@ class DB
         }
     }
 
-    public function query($sql, $class='stdClass')
+    public function queryAll($sql, $class='stdClass')
     {
+
         $res= $this->pdo->query($sql);
         $result=$res->fetchAll(PDO::FETCH_CLASS,$class);
 
@@ -56,6 +57,10 @@ class DB
              $ret[]=$row;
          }
          return $ret;
+    }
+    public function queryOne($sql,$class='atdClass')
+    {
+        return $this->queryAll($sql,$class)[0];
     }
 }
 
