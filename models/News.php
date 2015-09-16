@@ -6,19 +6,14 @@
  * Time: 22:52
  */
 
-class News {
+class News extends AbstractModel{
     public $id;
     public $title;
     public $news_text;
 
-    public static function getAll()
-    {
-        $db=new DB();
-        return $db->queryAll('SELECT * FROM news','News');
-    }
-    public static function getOne($id)
-    {
-        $db=new DB();
-        return $db->queryOne('SELECT * FROM news WHERE id='.$id,'News');
-    }
+    protected static $table='news';
+    protected static $class='News';
+
+
+
 } 
