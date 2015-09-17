@@ -12,8 +12,17 @@ class NewsController {
     public function actionAll()
     {
         $items=News::getAll();
+        $view=new View();
 
-        include __DIR__.'/../views/news/all.php';
+        $view->items=$items;
+        //var_dump($vuew->items);die;
+
+
+        foreach ($view as $k=>$k) {
+            echo $k;
+        }
+        die;
+        $view->display('all.php');
     }
 
     public function actionOne()
@@ -21,6 +30,12 @@ class NewsController {
 
         $id=$_GET['id'];
         $item=News::getOne($id);
-        include __DIR__.'/../views/news/one.php';
+
+        $vuew=new View();
+
+        $vuew->item=$item;
+        //$vuew->assign('item',$item);
+        $vuew->display('one.php');
+
     }
 } 
