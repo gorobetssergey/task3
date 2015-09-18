@@ -10,8 +10,11 @@ class View
     implements Iterator{
 
     protected $data=[];
+    private $position = 0;
 
-
+    public function __construct() {
+        $this->position = 0;
+    }
 
     public function __set($k, $v)
     {
@@ -19,40 +22,53 @@ class View
     }
     public function __get($k)
     {
-        return $this->data[$k];
+        //return $this->data[$k];
     }
-
-    public function display($template)
-    {
-        foreach ($this->data as $key=>$value) {
-            $$key=$value;
-        }
-
-        include __DIR__.'/../views/news/'.$template;
-    }
-
 
     public function current()
     {
+        return $this->array[$this->position];
     }
 
 
     public function next()
     {
+        ++$this->position;
     }
 
 
     public function key()
     {
+        return $this->position;
     }
 
 
     public function valid()
     {
+        return isset($this->array[$this->position]);
     }
 
 
     public function rewind()
     {
+        $this->position = 0;
+    }
+
+    public function render($template)
+    {
+
+        foreach ($this->data as $key=>$value) {
+            $$key=$value;
+        }
+        ob_start();
+        include __DIR__.'/../views/news/'.$template;
+        $content=ob_get_contents();
+        ob_end_clean();
+        return $content;
+    }
+
+    public function display($tamplate)
+    {
+        echo $this->render($tamplate);
     }
 }

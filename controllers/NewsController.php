@@ -15,13 +15,10 @@ class NewsController {
         $view=new View();
 
         $view->items=$items;
-        //var_dump($vuew->items);die;
-
 
         foreach ($view as $k=>$k) {
             echo $k;
         }
-        die;
         $view->display('all.php');
     }
 
